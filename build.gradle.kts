@@ -42,6 +42,4 @@ spotless {
 jgitver {
   nonQualifierBranches = "main"
   useDirty = true
-  useDistance = false
-  useGitCommitID = true
 }
