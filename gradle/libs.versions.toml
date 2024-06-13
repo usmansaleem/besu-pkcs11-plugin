@@ -1,0 +1,21 @@
+# Copyright $YEAR, Usman Saleem.
+# SPDX-License-Identifier: (Apache-2.0 OR MIT)
+
+# https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
+
+[versions]
+junit-jupiter = "5.10.2"
+spotless = "6.25.0"
+slf4j = "2.0.13"
+bouncy-castle = "1.78.1"
+jgitver = "0.10.0-rc03"
+
+[libraries]
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref  = "slf4j" }
+slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref  = "slf4j" }
+bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncy-castle" }
+
+[plugins]
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+jgitver = { id = "fr.brouillard.oss.gradle.jgitver", version.ref = "jgitver" }
