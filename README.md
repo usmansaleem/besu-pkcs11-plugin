@@ -9,9 +9,9 @@ integrate with HSM with PKCS11 interface. SoftHSM is used as a test HSM.
 ```
 
 ## Usage
+
 Drop the `jar` in the `/plugins` folder under Besu installation. This plugin will expose following additional cli 
 options:
--
 
 ## Linux SoftHSM Setup
 Following steps are tested on Ubuntu 24.04 LTS. Install following packages.
