@@ -17,7 +17,6 @@ dependencies {
 
   // This dependency is exported to consumers, that is to say found on their compile classpath.
   api(libs.bcprov)
-
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
