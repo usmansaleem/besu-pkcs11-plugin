@@ -9,6 +9,7 @@ spotless = "6.25.0"
 slf4j = "2.0.13"
 bouncy-castle = "1.78.1"
 jgitver = "0.10.0-rc03"
+jreleaser = "1.13.1"
 
 [libraries]
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
@@ -19,3 +20,4 @@ bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncy-cas
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 jgitver = { id = "fr.brouillard.oss.gradle.jgitver", version.ref = "jgitver" }
+jreleaser = { id = "org.jreleaser", version.ref = "jreleaser"}

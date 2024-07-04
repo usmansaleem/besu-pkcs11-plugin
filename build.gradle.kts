@@ -1,8 +1,15 @@
+import org.jreleaser.model.Active
+import org.jreleaser.model.Distribution
+import org.jreleaser.model.UpdateSection
+
 plugins {
   `java-library`
   alias(libs.plugins.spotless)
   alias(libs.plugins.jgitver)
+  alias(libs.plugins.jreleaser)
 }
+
+project.group = "info.usmans.tools"
 
 repositories {
   // Use Maven Central for resolving dependencies.
@@ -38,7 +45,64 @@ spotless {
   kotlinGradle { ktfmt() }
 }
 
-jgitver {
-  nonQualifierBranches = "main"
-  useDirty = true
+jgitver { nonQualifierBranches = "main" }
+
+tasks.register("printVersion") {
+  group = "Help"
+  description = "Prints the project version"
+  doLast { println("Version: ${project.version}") }
+}
+
+tasks.jar {
+  manifest {
+    attributes(
+        mapOf("Implementation-Title" to project.name, "Implementation-Version" to project.version))
+  }
+}
+
+jreleaser {
+  dependsOnAssemble = true
+  project {
+    description.set("Besu PKCS11-SoftHSM plugin")
+    authors.set(listOf("Usman Saleem"))
+    license.set("(Apache-2.0 OR MIT)")
+    inceptionYear.set("2024")
+    copyright.set("2024, Usman Saleem")
+    links {
+      homepage.set("https://github.com/usmansaleem/besu-pkcs11-plugin")
+      documentation.set("https://github.com/usmansaleem/besu-pkcs11-plugin")
+    }
+  }
+
+  distributions {
+    create("besu-pkcs11-plugin") {
+      distributionType.set(Distribution.DistributionType.SINGLE_JAR)
+      artifact {
+        path.set(layout.buildDirectory.file("libs/{{distributionName}}-{{projectVersion}}.jar"))
+      }
+    }
+  }
+
+  release {
+    github {
+      repoOwner = "usmansaleem"
+      token = "__DO_NOT_SET_HERE__"
+      // append artifacts to an existing release with matching tag
+      update {
+        enabled = true
+        sections.set(listOf(UpdateSection.ASSETS, UpdateSection.TITLE, UpdateSection.BODY))
+      }
+      // We need to create tag manually because our version calculation depends on it.
+      skipTag = true
+      changelog {
+        formatted.set(Active.ALWAYS)
+        preset.set("conventional-commits")
+        contributors {
+          enabled.set(true)
+          format.set(
+              "- {{contributorName}}{{#contributorUsernameAsLink}} ({{.}}){{/contributorUsernameAsLink}}")
+        }
+      }
+    }
+  }
 }
