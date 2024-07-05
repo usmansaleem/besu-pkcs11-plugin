@@ -13,10 +13,10 @@ semver {
   tagPrefix("v")
   initialVersion("0.0.0")
   findProperty("semver.overrideVersion")?.toString()?.let { overrideVersion(it) }
-
 }
 
 project.group = "info.usmans.tools"
+
 version = semver.version // project version, also used for jreleaser
 
 repositories {
