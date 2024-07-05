@@ -86,7 +86,6 @@ jreleaser {
   release {
     github {
       repoOwner = "usmansaleem"
-      token = "__DO_NOT_SET_HERE__"
       // append artifacts to an existing release with matching tag
       update {
         enabled = true
