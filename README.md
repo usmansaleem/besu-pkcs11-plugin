@@ -3,6 +3,9 @@
 A [Besu plugin](https://besu.hyperledger.org/private-networks/reference/plugin-api-interfaces) that shows how to 
 integrate with HSM with PKCS11 interface. SoftHSM is used as a test HSM.
 
+![GitHub Actions Workflow Status](https://github.com/usmansaleem/besu-pkcs11-plugin/actions/workflows/ci.yml/badge.svg?branch=main)
+![GitHub Release](https://img.shields.io/github/v/release/usmansaleem/besu-pkcs11-plugin?include_prereleases)
+
 ## Build Instructions
 ```shell
 ./gradlew clean build
