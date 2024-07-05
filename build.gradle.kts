@@ -61,7 +61,6 @@ tasks.jar {
 }
 
 jreleaser {
-  dependsOnAssemble = true
   project {
     description.set("Besu PKCS11-SoftHSM plugin")
     authors.set(listOf("Usman Saleem"))
@@ -73,7 +72,8 @@ jreleaser {
       documentation.set("https://github.com/usmansaleem/besu-pkcs11-plugin")
     }
   }
-
+  dependsOnAssemble.set(true)
+  gitRootSearch.set(true)
   distributions {
     create("besu-pkcs11-plugin") {
       distributionType.set(Distribution.DistributionType.SINGLE_JAR)

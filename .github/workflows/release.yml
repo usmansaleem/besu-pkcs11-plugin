@@ -30,7 +30,7 @@ jobs:
         uses: gradle/actions/setup-gradle@db19848a5fa7950289d3668fb053140cf3028d43 # v3.3.2
 
       - name: Clean
-        run: ./gradlew clean
+        run: ./gradlew clean printVersion
 
       - name: Assemble
         run: ./gradlew assemble
