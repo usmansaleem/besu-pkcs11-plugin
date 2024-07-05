@@ -5,11 +5,19 @@ import org.jreleaser.model.UpdateSection
 plugins {
   `java-library`
   alias(libs.plugins.spotless)
-  alias(libs.plugins.jgitver)
+  alias(libs.plugins.gradle.semver)
   alias(libs.plugins.jreleaser)
 }
 
+semver {
+  tagPrefix("v")
+  initialVersion("0.0.0")
+  findProperty("semver.overrideVersion")?.toString()?.let { overrideVersion(it) }
+
+}
+
 project.group = "info.usmans.tools"
+version = semver.version // project version, also used for jreleaser
 
 repositories {
   // Use Maven Central for resolving dependencies.
@@ -44,8 +52,6 @@ spotless {
 
   kotlinGradle { ktfmt() }
 }
-
-jgitver { nonQualifierBranches = "main" }
 
 tasks.register("printVersion") {
   group = "Help"
