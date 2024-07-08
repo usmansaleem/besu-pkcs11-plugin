@@ -1,3 +1,5 @@
+// Copyright 2024, Usman Saleem.
+// SPDX-License-Identifier: (Apache-2.0 OR MIT)
 import org.jreleaser.model.Active
 import org.jreleaser.model.Distribution
 import org.jreleaser.model.UpdateSection
@@ -14,16 +16,30 @@ project.group = "info.usmans.tools"
 repositories {
   // Use Maven Central for resolving dependencies.
   mavenCentral()
+
+  // For Besu plugin dependencies
+  maven {
+    url = uri("https://hyperledger.jfrog.io/artifactory/besu-maven/")
+    content { includeGroupByRegex("org\\.hyperledger\\.besu($|\\..*)") }
+  }
 }
 
 dependencies {
-  // Use JUnit Jupiter for testing.
-  testImplementation(libs.junit.jupiter)
-
-  testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-  // This dependency is exported to consumers, that is to say found on their compile classpath.
+  // This project jar is not supposed to be used as compilation dependency.
+  // `api` is used here to distinguish between dependencies which should be used IF it is to be used
+  // as a dependency during compiling some other library that depends on this project.
+  api(libs.besu.plugin.api)
   api(libs.bcprov)
+
+  // https://github.com/google/auto/tree/main/service
+  annotationProcessor(libs.google.auto.service)
+  implementation(libs.google.auto.service.annotations)
+  implementation(libs.slf4j.api)
+  implementation(libs.picocli)
+
+  // testing dependencies
+  testImplementation(libs.junit.jupiter)
+  testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
