@@ -5,6 +5,7 @@
 
 [versions]
 besu = "24.6.0"
+picocli = "4.7.5" # same version as in Besu
 google-auto-service = "1.1.1"
 junit-jupiter = "5.10.2"
 spotless = "6.25.0"
@@ -20,6 +21,7 @@ google-auto-service-annotations = { module = "com.google.auto.service:auto-servi
 slf4j-api = { module = "org.slf4j:slf4j-api", version.ref  = "slf4j" }
 slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref  = "slf4j" }
 bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncy-castle" }
+picocli = {module = "info.picocli:picocli", version.ref = "picocli"}
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
 
 [plugins]

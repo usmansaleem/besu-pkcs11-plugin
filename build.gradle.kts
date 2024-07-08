@@ -34,6 +34,8 @@ dependencies {
   // https://github.com/google/auto/tree/main/service
   annotationProcessor(libs.google.auto.service)
   implementation(libs.google.auto.service.annotations)
+  implementation(libs.slf4j.api)
+  implementation(libs.picocli)
 
   // testing dependencies
   testImplementation(libs.junit.jupiter)
