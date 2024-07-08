@@ -1,7 +1,11 @@
 # Besu Plugin - PKCS11 SoftHSM
 
-A [Besu plugin](https://besu.hyperledger.org/private-networks/reference/plugin-api-interfaces) that shows how to 
-integrate with HSM with PKCS11 interface. SoftHSM is used as a test HSM.
+A [Besu plugin][1] that provides a custom security module to load the [node key][2] from an HSM, such as [SoftHSM][3], 
+using PKCS11 libraries.
+
+[1]: <https://besu.hyperledger.org/private-networks/reference/plugin-api-interfaces>
+[2]: <https://besu.hyperledger.org/public-networks/concepts/node-keys>
+[3]: <https://www.opendnssec.org/softhsm/>
 
 ![GitHub Actions Workflow Status](https://github.com/usmansaleem/besu-pkcs11-plugin/actions/workflows/ci.yml/badge.svg?branch=main)
 ![GitHub Release](https://img.shields.io/github/v/release/usmansaleem/besu-pkcs11-plugin?include_prereleases)
@@ -31,8 +35,8 @@ The plugin jar will be available at `build/libs/besu-pkcs11-plugin-<version>.jar
 
 ## Usage
 
-Drop the `jar` in the `/plugins` folder under Besu installation. This plugin will expose following additional cli 
-options:
+Drop the `besu-pkcs11-plugin-<version>.jar` in the `/plugins` folder under Besu installation. This plugin will expose 
+following additional cli options:
 `TBA`
 
 ## Linux SoftHSM Setup
