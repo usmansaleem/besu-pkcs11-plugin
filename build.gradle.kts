@@ -1,3 +1,5 @@
+// Copyright 2024, Usman Saleem.
+// SPDX-License-Identifier: (Apache-2.0 OR MIT)
 import org.jreleaser.model.Active
 import org.jreleaser.model.Distribution
 import org.jreleaser.model.UpdateSection
@@ -23,12 +25,17 @@ repositories {
 }
 
 dependencies {
-  // we are using implementation for the libraries that should already be available on Besu classpath
-  implementation(libs.besu.plugin.api)
-  implementation(libs.bcprov)
+  // This project jar is not supposed to be used as compilation dependency.
+  // `api` is used here to distinguish between dependencies which should be used IF it is to be used
+  // as a dependency during compiling some other library that depends on this project.
+  api(libs.besu.plugin.api)
+  api(libs.bcprov)
+
+  // https://github.com/google/auto/tree/main/service
+  annotationProcessor(libs.google.auto.service)
+  implementation(libs.google.auto.service.annotations)
 
   // testing dependencies
-  // Use JUnit Jupiter for testing.
   testImplementation(libs.junit.jupiter)
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

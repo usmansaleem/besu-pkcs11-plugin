@@ -5,6 +5,7 @@
 
 [versions]
 besu = "24.6.0"
+google-auto-service = "1.1.1"
 junit-jupiter = "5.10.2"
 spotless = "6.25.0"
 slf4j = "2.0.13"
@@ -13,11 +14,13 @@ jgitver = "0.10.0-rc03"
 jreleaser = "1.13.1"
 
 [libraries]
-junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
+besu-plugin-api = {module = "org.hyperledger.besu:plugin-api", version.ref = "besu"}
+google-auto-service = { module = "com.google.auto.service:auto-service", version.ref = "google-auto-service" }
+google-auto-service-annotations = { module = "com.google.auto.service:auto-service-annotations", version.ref = "google-auto-service" }
 slf4j-api = { module = "org.slf4j:slf4j-api", version.ref  = "slf4j" }
 slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref  = "slf4j" }
 bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncy-castle" }
-besu-plugin-api = {module = "org.hyperledger.besu:plugin-api", version.ref = "besu"}
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
