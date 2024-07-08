@@ -14,6 +14,12 @@ project.group = "info.usmans.tools"
 repositories {
   // Use Maven Central for resolving dependencies.
   mavenCentral()
+
+  // For Besu plugin dependencies
+  maven {
+    url = uri("https://hyperledger.jfrog.io/artifactory/besu-maven/")
+    content { includeGroupByRegex("org\\.hyperledger\\.besu($|\\..*)") }
+  }
 }
 
 dependencies {
