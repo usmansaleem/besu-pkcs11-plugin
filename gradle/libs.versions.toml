@@ -4,6 +4,7 @@
 # https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
 
 [versions]
+besu = "24.6.0"
 junit-jupiter = "5.10.2"
 spotless = "6.25.0"
 slf4j = "2.0.13"
@@ -16,6 +17,7 @@ junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "jun
 slf4j-api = { module = "org.slf4j:slf4j-api", version.ref  = "slf4j" }
 slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref  = "slf4j" }
 bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncy-castle" }
+besu-plugin-api = {module = "org.hyperledger.besu:plugin-api", version.ref = "besu"}
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

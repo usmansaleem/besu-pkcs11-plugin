@@ -23,13 +23,14 @@ repositories {
 }
 
 dependencies {
+  // we are using implementation for the libraries that should already be available on Besu classpath
+  implementation(libs.besu.plugin.api)
+  implementation(libs.bcprov)
+
+  // testing dependencies
   // Use JUnit Jupiter for testing.
   testImplementation(libs.junit.jupiter)
-
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-  // This dependency is exported to consumers, that is to say found on their compile classpath.
-  api(libs.bcprov)
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
