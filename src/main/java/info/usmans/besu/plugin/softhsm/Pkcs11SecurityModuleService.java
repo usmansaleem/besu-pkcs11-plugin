@@ -132,7 +132,7 @@ public class Pkcs11SecurityModuleService implements SecurityModule {
     }
 
     if (!(publicKey instanceof ECPublicKey)) {
-      throw new RuntimeException(
+      throw new SecurityModuleException(
           "Public Key is not a valid ECPublicKey for alias: " + cliParams.getPrivateKeyAlias());
     }
     ecPublicKey = (ECPublicKey) publicKey;
