@@ -8,3 +8,7 @@
 build
 
 .idea
+
+# Ignore data and tokens in volume directory
+docker/volumes/data
+docker/volumes/tokens

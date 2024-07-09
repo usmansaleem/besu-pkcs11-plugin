@@ -27,7 +27,7 @@ public class Pkcs11PluginCliOptions {
       names = "--plugin-" + SECURITY_MODULE_NAME + "-key-alias",
       description = "Alias or label of the private key that is stored in the HSM",
       required = true,
-      paramLabel = "<path>")
+      paramLabel = "<label>")
   private String privateKeyAlias;
 
   /** Default constructor. Performs no initialization. */

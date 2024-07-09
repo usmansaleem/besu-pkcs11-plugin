@@ -60,10 +60,22 @@ public class Pkcs11SecurityModuleService implements SecurityModule {
     LOG.info("Initializing PKCS11 provider ...");
 
     try {
-      provider =
-          Security.getProvider("SUNPKCS11").configure(cliParams.getPkcs11ConfigPath().toString());
+      final Provider sunPKCS11Provider = Security.getProvider("SunPKCS11");
+      if (sunPKCS11Provider == null) {
+        throw new SecurityModuleException("SunPKCS11 provider not found");
+      }
+      // configure the provider with the PKCS11 configuration file
+      provider = sunPKCS11Provider.configure(cliParams.getPkcs11ConfigPath().toString());
+      if (provider == null) {
+        throw new SecurityModuleException("Unable to configure SunPKCS11 provider");
+      }
+      // finally add configured provider.
       Security.addProvider(provider);
     } catch (final Exception e) {
+      if (e instanceof SecurityModuleException) {
+        throw (SecurityModuleException) e;
+      }
+
       throw new SecurityModuleException(
           "Error encountered while loading SunPKCS11 provider with configuration: "
               + cliParams.getPkcs11ConfigPath().toString(),

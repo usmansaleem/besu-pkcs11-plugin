@@ -7,6 +7,7 @@ import org.hyperledger.besu.plugin.BesuContext;
 import org.hyperledger.besu.plugin.BesuPlugin;
 import org.hyperledger.besu.plugin.services.PicoCLIOptions;
 import org.hyperledger.besu.plugin.services.SecurityModuleService;
+import org.hyperledger.besu.plugin.services.securitymodule.SecurityModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,11 +49,17 @@ public class Pkcs11HsmPlugin implements BesuPlugin {
    */
   private void registerSecurityModule(final BesuContext besuContext) {
     // lazy-init our security module implementation during register phase
-    besuContext
-        .getService(SecurityModuleService.class)
-        .orElseThrow(
-            () -> new IllegalStateException("Expecting SecurityModuleService to be present"))
-        .register(SECURITY_MODULE_NAME, () -> new Pkcs11SecurityModuleService(cliParams));
+    final SecurityModuleService securityModuleService =
+        besuContext
+            .getService(SecurityModuleService.class)
+            .orElseThrow(
+                () -> new IllegalStateException("Expecting SecurityModuleService to be present"));
+
+    securityModuleService.register(SECURITY_MODULE_NAME, this::getSecurityModuleSupplier);
+  }
+
+  private SecurityModule getSecurityModuleSupplier() {
+    return new Pkcs11SecurityModuleService(cliParams);
   }
 
   @Override
