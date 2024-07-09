@@ -1,0 +1,10 @@
+# Copyright 2024, Usman Saleem.
+# SPDX-License-Identifier: (Apache-2.0 OR MIT)
+
+# Exclude everything
+*
+
+# Include specific files and directories needed for the build
+!docker/scripts/entrypoint.sh
+!Dockerfile
+!build/libs/

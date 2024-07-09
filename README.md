@@ -37,14 +37,61 @@ The plugin jar will be available at `build/libs/besu-pkcs11-plugin-<version>.jar
 
 Drop the `besu-pkcs11-plugin-<version>.jar` in the `/plugins` folder under Besu installation. This plugin will expose 
 following additional cli options:
-`TBA`
+```shell
+--plugin-pkcs11-hsm-config-path=<path>
+                             Path to the PKCS11 configuration file
+--plugin-pkcs11-hsm-key-alias=<label>
+                             Alias or label of the private key that is stored in the HSM
+--plugin-pkcs11-hsm-password-path=<path>
+                             Path to the file that contains password or PIN to access PKCS11 token
+```
+The security module provided by this plugin can be loaded with following cli option:
+```shell
+--security-module=pkcs11-hsm
+```
 
-## Linux SoftHSM Setup
-Following steps are tested on Ubuntu 24.04 LTS. Install following packages.
-`TBA`
 
 ## Docker setup 
-See Dockerfile for details.
+- The plugin can be tested as a docker image. The provided [`Dockerfile`](./Dockerfile) is based on Besu's official docker image.
+It installs following additional package to manage SECP256K1 private keys and SoftHSM:
+
+```
+apt-get install -y --no-install-recommends \
+    openssl \
+    libssl3 \
+    softhsm2 \
+    opensc \
+    gnutls-bin
+```
+- The Dockerfile uses a custom script [`entrypoint.sh`](./docker/scripts/entrypoint.sh) as entrypoint. This script 
+initializes SoftHSM and generates a private key if required.
+- The Dockerfile copies the plugin jar to `/plugins` folder.
+- See [Besu documentation](https://besu.hyperledger.org/public-networks/get-started/install/run-docker-image) for 
+further details about other docker options required to run Besu.
+- See the sample [Besu config file](./docker/volumes/config) that defines minimal options required to use the plugin.
+- Following is an example to build the docker image:
+```shell
+docker build --no-cache -t besu-pkcs11:latest .
+```
+- To run Besu node for testing with SoftHSM, Following directories be mounted as volumes. 
+Change the path according to your requirements:
+    - `./docker/volumes/data` for Besu data. It should be mounted to `/var/lib/besu`
+    - `./docker/volumes/tokens` for SoftHSM data. It should be mounted to `/var/lib/tokens`
+    - `./docker/volumes/config` for Besu and PKCS11 config files. It MUST be mounted to `/etc/besu/config`. This directory contains the sample configurations.
+
+> [!NOTE]
+> To initialize the SoftHSM tokens, the entrypoint script will attempt to generate a SECP256K1 private key and 
+> initialize SoftHSM on the first run. The SoftHSM `PIN` is defined in `./docker/volumes/config/pkcs11-hsm-password.txt`.
+> The `SO_PIN` can be overridden via environment variable, however, it is not required once initialization is done.
+
+- To run the Besu node:
+```shell
+docker run --rm -it \
+    -v ./docker/volumes/data:/var/lib/besu \
+    -v ./docker/volumes/tokens:/var/lib/tokens \
+    -v ./docker/volumes/config:/etc/besu/config \
+    besu-pkcs11:latest --config-file=/etc/besu/config/besu-dev.toml
+```
 
 ## License
 

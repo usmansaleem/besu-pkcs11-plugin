@@ -1,0 +1,19 @@
+network="dev"
+miner-enabled=true
+miner-coinbase="0xfe3b557e8fb62b89f4916b721be55ceb828dbd73"
+rpc-http-cors-origins=["all"]
+host-allowlist=["*"]
+rpc-ws-enabled=true
+rpc-http-enabled=true
+data-path="/var/lib/besu"
+
+# plugins options
+plugin-pkcs11-hsm-config-path="/etc/besu/config/pkcs11-softhsm.cfg"
+plugin-pkcs11-hsm-key-alias="testkey"
+plugin-pkcs11-hsm-password-path="/etc/besu/config/pkcs11-hsm-password.txt"
+
+# security module
+security-module="pkcs11-hsm"
+
+# Logging
+logging="DEBUG"
