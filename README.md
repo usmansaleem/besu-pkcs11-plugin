@@ -22,7 +22,7 @@ or build it yourself.
 
 ```toml
 [versions]
-besu = "24.6.0"
+besu = "24.8.0"
 ```
 
 - Build the plugin:
