@@ -4,7 +4,7 @@
 # https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
 
 [versions]
-besu = "24.8.0"
+besu = "26.2.0"
 picocli = "4.7.5" # same version as in Besu
 google-auto-service = "1.1.1"
 junit-jupiter = "5.10.2"
@@ -15,7 +15,7 @@ jgitver = "0.10.0-rc03"
 jreleaser = "1.13.1"
 
 [libraries]
-besu-plugin-api = {module = "org.hyperledger.besu:plugin-api", version.ref = "besu"}
+besu-plugin-api = {module = "org.hyperledger.besu:besu-plugin-api", version.ref = "besu"}
 google-auto-service = { module = "com.google.auto.service:auto-service", version.ref = "google-auto-service" }
 google-auto-service-annotations = { module = "com.google.auto.service:auto-service-annotations", version.ref = "google-auto-service" }
 slf4j-api = { module = "org.slf4j:slf4j-api", version.ref  = "slf4j" }

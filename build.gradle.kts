@@ -19,7 +19,7 @@ repositories {
 
   // For Besu plugin dependencies
   maven {
-    url = uri("https://hyperledger.jfrog.io/artifactory/besu-maven/")
+    url = uri("https://hyperledger.jfrog.io/hyperledger/besu-maven")
     content { includeGroupByRegex("org\\.hyperledger\\.besu($|\\..*)") }
   }
 }

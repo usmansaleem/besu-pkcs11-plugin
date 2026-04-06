@@ -17,12 +17,12 @@ or build it yourself.
 > [!NOTE] 
 > This project requires Java 21 or later. If it is not available, the gradle build will attempt to download one and use it.
 
-- Check [Besu releases](https://github.com/hyperledger/besu/releases) for latest stable version and update it in 
-[`gradle/libs.versions.toml`](gradle/libs.versions.toml). For example:
+- The project currently targets Besu `26.2.0`.
+- The version is declared in [`gradle/libs.versions.toml`](gradle/libs.versions.toml):
 
 ```toml
 [versions]
-besu = "24.8.0"
+besu = "26.2.0"
 ```
 
 - Build the plugin:
@@ -49,6 +49,11 @@ The security module provided by this plugin can be loaded with following cli opt
 ```shell
 --security-module=pkcs11-hsm
 ```
+
+> [!WARNING]
+> Known limitation: this plugin is currently not compatible with AWS CloudHSM.
+> Besu's security module integration requires secp256k1 ECDH key agreement,
+> which AWS CloudHSM does not expose via PKCS#11.
 
 
 ## Docker setup 
