@@ -3,8 +3,8 @@
 package info.usmans.besu.plugin.softhsm;
 
 import com.google.auto.service.AutoService;
-import org.hyperledger.besu.plugin.BesuContext;
 import org.hyperledger.besu.plugin.BesuPlugin;
+import org.hyperledger.besu.plugin.ServiceManager;
 import org.hyperledger.besu.plugin.services.PicoCLIOptions;
 import org.hyperledger.besu.plugin.services.SecurityModuleService;
 import org.hyperledger.besu.plugin.services.securitymodule.SecurityModule;
@@ -22,35 +22,35 @@ public class Pkcs11HsmPlugin implements BesuPlugin {
   private final Pkcs11PluginCliOptions cliParams = new Pkcs11PluginCliOptions();
 
   @Override
-  public void register(final BesuContext besuContext) {
+  public void register(final ServiceManager serviceManager) {
     LOG.info("Registering plugin ...");
-    registerCliOptions(besuContext);
-    registerSecurityModule(besuContext);
+    registerCliOptions(serviceManager);
+    registerSecurityModule(serviceManager);
   }
 
   /**
-   * Registers {@code Pkcs11PluginCliOptions} with {@code PicoCLIOptions} service provided by {@code
-   * BesuContext}.
+   * Registers {@code Pkcs11PluginCliOptions} with {@code PicoCLIOptions} from the provided {@code
+   * ServiceManager}.
    *
-   * @param besuContext An instance of {@code BesuContext}
+   * @param serviceManager the Besu service manager
    */
-  private void registerCliOptions(final BesuContext besuContext) {
-    besuContext
+  private void registerCliOptions(final ServiceManager serviceManager) {
+    serviceManager
         .getService(PicoCLIOptions.class)
         .orElseThrow(() -> new IllegalStateException("Expecting PicoCLIOptions to be present"))
         .addPicoCLIOptions(SECURITY_MODULE_NAME, cliParams);
   }
 
   /**
-   * Registers {@code Pkcs11SecurityModule} with the {@code SecurityModuleService} service provided
-   * by {@code BesuContext}.
+   * Registers {@code Pkcs11SecurityModule} with the {@code SecurityModuleService} from the provided
+   * {@code ServiceManager}.
    *
-   * @param besuContext An instance of {@code BesuContext}
+   * @param serviceManager the Besu service manager
    */
-  private void registerSecurityModule(final BesuContext besuContext) {
+  private void registerSecurityModule(final ServiceManager serviceManager) {
     // lazy-init our security module implementation during register phase
     final SecurityModuleService securityModuleService =
-        besuContext
+        serviceManager
             .getService(SecurityModuleService.class)
             .orElseThrow(
                 () -> new IllegalStateException("Expecting SecurityModuleService to be present"));
