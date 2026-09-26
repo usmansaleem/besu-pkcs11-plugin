@@ -1,3 +1,8 @@
+> [!WARNING]
+> **This repository is archived and no longer maintained.** Besu now has an official
+> HSM/PKCS11 security-module plugin: **[besu-eth/besu-hsm-plugin](https://github.com/besu-eth/besu-hsm-plugin)**.
+> Please migrate to that project for updates and support.
+
 # Besu Plugin - PKCS11 SoftHSM
 
 A [Besu plugin][1] that provides a custom security module to load the [node key][2] from an HSM, such as [SoftHSM][3], 
